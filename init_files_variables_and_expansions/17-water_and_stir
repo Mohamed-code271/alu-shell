@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(printf "%o" "$(($(tr 'water' '\0-\4' <<< $WATER | od -An -tu1 | tr -dc '0-9') + $(tr 'stir.' '\0-\4' <<< $STIR | od -An -tu1 | tr -dc '0-9')))" | tr '0-7' 'bestchol')
+echo $(printf '%o' "$((5#$(tr 'water' '01234' <<< $WATER) + 5#$(tr 'stir.' '01234' <<< $STIR)))" | tr '01234567' 'bestchol')
