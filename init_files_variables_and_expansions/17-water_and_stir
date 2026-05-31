@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(python3 -c "w='water';s='stir.';b='bestchol';W=sum(w.index(c)*len(w)**i for i,c in enumerate(reversed('$WATER')));S=sum(s.index(c)*len(s)**i for i,c in enumerate(reversed('$STIR')));n=W+S;r='';exec(\"while n:r=b[n%len(b)]+r;n//=len(b)\");print(r)")
+echo $(printf "%o" "$(($(tr 'water' '\0-\4' <<< $WATER | od -An -tu1 | tr -dc '0-9') + $(tr 'stir.' '\0-\4' <<< $STIR | od -An -tu1 | tr -dc '0-9')))" | tr '0-7' 'bestchol')
