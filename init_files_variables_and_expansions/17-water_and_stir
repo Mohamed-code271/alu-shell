@@ -1,27 +1,2 @@
 #!/bin/bash
-water="water"
-stir="stir."
-bestchol="bestchol"
-
-to_decimal() {
-    local val=$1 base=$2 result=0 len=${#1}
-    for ((i=0; i<len; i++)); do
-        char="${val:$i:1}"
-        pos="${base%%$char*}"
-        result=$((result * ${#base} + ${#pos}))
-    done
-    echo $result
-}
-
-from_decimal() {
-    local num=$1 base=$2 result=""
-    while [ $num -gt 0 ]; do
-        result="${base:$((num % ${#base})):1}$result"
-        num=$((num / ${#base}))
-    done
-    echo $result
-}
-
-w=$(to_decimal "$WATER" "$water")
-s=$(to_decimal "$STIR" "$stir")
-from_decimal $(( w + s )) "$bestchol"
+echo $(python3 -c "w='water';s='stir.';b='bestchol';W=sum(w.index(c)*len(w)**i for i,c in enumerate(reversed('$WATER')));S=sum(s.index(c)*len(s)**i for i,c in enumerate(reversed('$STIR')));n=W+S;r='';exec(\"while n:r=b[n%len(b)]+r;n//=len(b)\");print(r)")
