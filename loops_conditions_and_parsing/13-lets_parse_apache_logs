@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Displays visitor IP and HTTP status code from Apache log
+awk '{print $1, $9}' /root/alu-shell/loops_conditions_and_parsing/apache-access.log
